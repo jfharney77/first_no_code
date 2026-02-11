@@ -1,0 +1,11 @@
+from fastapi import FastAPI
+import uvicorn
+
+app = FastAPI()
+
+@app.get("/t_b_m")
+def t_b_m():
+    return {"message": "t_b_m endpoint active"}
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=6015)

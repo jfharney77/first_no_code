@@ -127,4 +127,22 @@ corresponding variables to config.bat and run that app in a different tab in the
 
 ---
 
-Great!  Now lets do the 
+Great!  Now can we add an optional argument where if the argument is equal to "samewindow", it does not open a new window, but runs all the services in parallel.   
+Im not sure how this can be done in a single window, but it would be a great option to have if someone just had a purely linux environment and couldnt use 
+windows to open a new terminal
+
+---
+
+Great!  Now i'd like to add a few more services:
+1 - c_s_a_r_m under port 6013
+2 - i_a_r_m under port 6017
+3 - o_i_m under port 6011
+4 - pr_m under port 6007
+5 - t_a_m under port 6010
+6 - t_b_m under port 6015
+7 - t_d_m under port 6016
+8 - t_e_m under port 6012
+9 - v_m under port 6014
+10 - w_mj under port 6008
+
+write the app.py files in the same way for these, include them in the install and put their variables in the config.bat
