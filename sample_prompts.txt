@@ -1,0 +1,59 @@
+great!  this worked
+
+i will be keepting prompts in a scratch space called "sample_prompts.txt" so do not remove this file for today.
+
+in this branch I want to explore scripting with bash and windows batch.  
+
+Create a new directory called "explore_scripts" and in that directory create a new directory called "mpa".  This directory represents a 
+project that the scripts will manipulate.
+
+In "mpa" create two folders: (1) bash and (2) bat.  Any bash scripts and windows batch scripts will be placed in those 2 directories respectively.
+
+As a first step, I want to create a file in each of those two directories called "config" (use "config.sh" in the bash directory and "config.bat" in the bat directory)
+
+in config.sh and config.bat, start with the following:
+1 - create an environment variable called "DEFAULT_PROJ_ROOT" and set that equal to the parent directory to the directory 
+that the script exists. (e.g. in bat, you would use %~dp0\.. )
+
+We'll start there and then will prompt again once done
+
+---
+
+Great!
+As a further test, create a new direcotry in mpa called "src" and a file called main.py.   In this file, you will just simply put a print statement of "hello world".  
+After this file is created, add a statement in both bash and bat and scripts that will run the main file (using a simple python commandline)
+
+---
+
+just a quick cleanup.  Since we are in a separate branch from the rest, can you remove the following directories from this devel-scripts branch?
+- alternative_stack
+- office_chores
+- db.sqlite3
+
+---
+
+ok, will try a slightly more complex python file.  
+Create a directory in src called "servers/m/g/p_m/basic/" and a new file called "app.py".  app.py is a fastapi api 
+with an endpoint called "p_m" running on port 6006 and can be run with a uvicorn main method (
+    i.e. I should be able to run app.py in the mpa directory by simply running python servers/m/g/p_m/basic/app.py
+ )
+ replace the running of main.py with the running of this app.py file in the two config files
+
+ ---
+
+ ok great!
+ now about those pip dependencies
+
+ I would like to create a complementary script for the config scripts in bash and bat.  
+ Lets call it install_dependencies (.bat or .sh depending upon which script)
+
+ The complementary script I would like to create is "uv_install"(.bat or .sh).  In this script, I would like to be able to 
+ run a uv installation of the following packages:
+ - ariadne==0.18.0
+ - uvicorn
+ - fastapi
+
+ This "uv_install" script would be called first in the config.sh script 
+ to ensure that all the proper dependencies have been synced on the local machine before running app.py
+
+ assume the use will run the config script from the mpa directory so if you need to put uv.lock and pyproject.toml files somewhere on the local drive then put it there
