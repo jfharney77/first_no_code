@@ -3,7 +3,21 @@
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 . "$SCRIPT_DIR/config.sh"
 
-stop_service() {
+stop_service_samewindow() {
+    PORT=$1
+    NAME=$2
+
+    PID=$(lsof -ti :$PORT 2>/dev/null || fuser $PORT/tcp 2>/dev/null)
+
+    if [ -n "$PID" ]; then
+        echo "Stopping $NAME on port $PORT (PID: $PID)..."
+        kill $PID
+    else
+        echo "No service found running on port $PORT ($NAME)."
+    fi
+}
+
+stop_service_tabs() {
     PORT=$1
     NAME=$2
 
@@ -17,6 +31,12 @@ stop_service() {
     fi
 }
 
-stop_service $P_M_SERVER_PORT "$SERVICE_PM_NAME"
-stop_service $I_T_M_SERVER_PORT "$SERVICE_ITM_NAME"
-stop_service $O_M_SERVER_PORT "$SERVICE_OM_NAME"
+if [ "$1" = "samewindow" ]; then
+    stop_service_samewindow $P_M_SERVER_PORT "$SERVICE_PM_NAME"
+    stop_service_samewindow $I_T_M_SERVER_PORT "$SERVICE_ITM_NAME"
+    stop_service_samewindow $O_M_SERVER_PORT "$SERVICE_OM_NAME"
+else
+    stop_service_tabs $P_M_SERVER_PORT "$SERVICE_PM_NAME"
+    stop_service_tabs $I_T_M_SERVER_PORT "$SERVICE_ITM_NAME"
+    stop_service_tabs $O_M_SERVER_PORT "$SERVICE_OM_NAME"
+fi

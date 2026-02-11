@@ -124,3 +124,7 @@ create a variable called P_M_SERVER_PATH, set it equal to src/servers/m/g/p_m an
 
 ok great!  now i would like to add a similar app.py in the path src/servers/m/g/o_m/basic.  In a similar way to the i_t_m and p_m, could you add 
 corresponding variables to config.bat and run that app in a different tab in the window that gets opened when running?
+
+---
+
+Great!  Now lets do the 
