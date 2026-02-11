@@ -1,0 +1,15 @@
+{% extends "chores/base.html" %}
+
+{% block title %}Delete Recurring Chore{% endblock %}
+
+{% block content %}
+<h2>Delete Recurring Chore</h2>
+<p>Are you sure you want to delete the recurring rule <strong>{{ recurring.title }}</strong>?</p>
+<p class="text-muted">Existing chore instances will be kept but unlinked from this rule.</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a href="{% url 'chores:recurring_list' %}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

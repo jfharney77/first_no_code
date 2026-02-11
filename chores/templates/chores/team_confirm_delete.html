@@ -1,0 +1,15 @@
+{% extends "chores/base.html" %}
+
+{% block title %}Delete Team Member{% endblock %}
+
+{% block content %}
+<h2>Delete Team Member</h2>
+<p>Are you sure you want to delete <strong>{{ member.name }}</strong> ({{ member.email }})?</p>
+<p class="text-muted">Their chore assignments will be unlinked but not deleted.</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a href="{% url 'chores:team_list' %}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

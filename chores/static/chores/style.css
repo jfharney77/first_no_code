@@ -1,0 +1,60 @@
+/* Calendar styling - Outlook-inspired */
+
+.calendar-table {
+    table-layout: fixed;
+}
+
+.calendar-day {
+    height: 120px;
+    vertical-align: top;
+    padding: 4px 6px;
+    overflow: hidden;
+}
+
+.day-number {
+    font-size: 0.85rem;
+    margin-bottom: 2px;
+}
+
+.day-number a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.day-number a:hover {
+    color: #0d6efd;
+    text-decoration: underline;
+}
+
+.calendar-today {
+    background-color: #e7f1ff !important;
+    border-color: #0d6efd !important;
+}
+
+.chore-entry {
+    display: block;
+    font-size: 0.75rem;
+    padding: 1px 4px;
+    margin-bottom: 2px;
+    background-color: #0d6efd;
+    color: #fff;
+    border-radius: 3px;
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.chore-entry:hover {
+    background-color: #0b5ed7;
+    color: #fff;
+}
+
+.chore-completed {
+    background-color: #198754;
+    text-decoration: line-through;
+}
+
+.chore-completed:hover {
+    background-color: #157347;
+}

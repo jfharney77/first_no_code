@@ -1,0 +1,50 @@
+{% extends "chores/base.html" %}
+
+{% block title %}{{ chore.title }}{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-start mb-3">
+    <h2>{{ chore.title }}</h2>
+    <div>
+        <a href="{% url 'chores:chore_toggle' chore.pk %}" class="btn btn-sm {% if chore.is_completed %}btn-outline-secondary{% else %}btn-success{% endif %}">
+            {% if chore.is_completed %}Mark Incomplete{% else %}Mark Complete{% endif %}
+        </a>
+        <a href="{% url 'chores:chore_update' chore.pk %}" class="btn btn-sm btn-outline-primary">Edit</a>
+        <a href="{% url 'chores:chore_delete' chore.pk %}" class="btn btn-sm btn-outline-danger">Delete</a>
+    </div>
+</div>
+
+<table class="table" style="max-width: 500px;">
+    <tr>
+        <th>Date</th>
+        <td>{{ chore.date }}</td>
+    </tr>
+    <tr>
+        <th>Assigned To</th>
+        <td>{{ chore.assigned_to|default:"Unassigned" }}</td>
+    </tr>
+    <tr>
+        <th>Status</th>
+        <td>
+            {% if chore.is_completed %}
+            <span class="badge bg-success">Completed</span>
+            {% else %}
+            <span class="badge bg-warning text-dark">Pending</span>
+            {% endif %}
+        </td>
+    </tr>
+    {% if chore.recurring_source %}
+    <tr>
+        <th>Recurring</th>
+        <td>From: {{ chore.recurring_source.title }}</td>
+    </tr>
+    {% endif %}
+</table>
+
+{% if chore.description %}
+<h5>Description</h5>
+<p>{{ chore.description }}</p>
+{% endif %}
+
+<a href="{% url 'chores:calendar' %}" class="btn btn-secondary btn-sm">Back to Calendar</a>
+{% endblock %}

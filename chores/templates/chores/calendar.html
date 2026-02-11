@@ -1,0 +1,46 @@
+{% extends "chores/base.html" %}
+{% load static %}
+
+{% block title %}{{ month_name }} {{ year }} - Office Chores{% endblock %}
+
+{% block content %}
+<div class="calendar-header d-flex justify-content-between align-items-center mb-3">
+    <a href="{% url 'chores:calendar_month' prev_year prev_month %}" class="btn btn-outline-primary">&laquo; Prev</a>
+    <h2 class="mb-0">{{ month_name }} {{ year }}</h2>
+    <a href="{% url 'chores:calendar_month' next_year next_month %}" class="btn btn-outline-primary">Next &raquo;</a>
+</div>
+
+<div class="mb-2">
+    <a href="{% url 'chores:chore_create' %}" class="btn btn-primary btn-sm">Add Chore</a>
+</div>
+
+<table class="table table-bordered calendar-table">
+    <thead class="table-primary">
+        <tr>
+            {% for day_name in day_names %}
+            <th class="text-center">{{ day_name }}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for week in weeks %}
+        <tr>
+            {% for day in week %}
+            <td class="calendar-day {% if not day.is_current_month %}text-muted bg-light{% endif %} {% if day.is_today %}calendar-today{% endif %}">
+                <div class="day-number">
+                    <a href="{% url 'chores:chore_create_date' day.date|date:'Y-m-d' %}" class="{% if day.is_today %}fw-bold{% endif %}" title="Add chore on {{ day.date|date:'M d' }}">
+                        {{ day.date.day }}
+                    </a>
+                </div>
+                {% for chore in day.chores %}
+                <a href="{% url 'chores:chore_detail' chore.pk %}" class="chore-entry {% if chore.is_completed %}chore-completed{% endif %}" title="{{ chore.title }}{% if chore.assigned_to %} - {{ chore.assigned_to }}{% endif %}">
+                    {{ chore.title|truncatechars:20 }}
+                </a>
+                {% endfor %}
+            </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
