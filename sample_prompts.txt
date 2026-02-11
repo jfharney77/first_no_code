@@ -1,0 +1,29 @@
+Make a chore app to manage chores at the office.  It should:
+- Show a calendar view like Outlook to see all our current chores
+- Allow adding/removing chores
+- Be able to make chores recurring on a schedule
+- Assign chores to team members
+- Add/remove team members
+Ask me questions to clarify product requirements, technical requirements, engineering principles, and hard constraints
+
+NOTE: Yeah I know youve probably seen this before but humor me!  This is the first time using youve
+
+
+
+
+
+  Product Requirements
+  1. How many team members roughly? (5 people vs 50 changes the design)                                                 2. Does "calendar view like Outlook" mean a monthly grid, weekly view, or both? Should it support day view too?     
+  3. For recurring chores — what schedules? (daily, weekly, biweekly, monthly, custom cron-like?)                       4. Should chores have any metadata beyond assignee and date? (e.g., description, priority, estimated time,
+  completion status)
+  5. Do you need any notifications (email, in-app) when a chore is assigned or due?
+  6. Should multiple people be assignable to a single chore, or just one?
+
+
+  this is great it is working...
+  can you create a new branch called devel and commit all this code to devel and push it out to github for me?
+
+
+  just as an experiment, change to a new branch called devel-react.
+  in this branch, do the same process except with the tech stack being react for the front end and fastapi for the backend.   keep the previous code intact and place the new code into a folder called "alternative_stack"
+  
