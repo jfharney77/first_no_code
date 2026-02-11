@@ -57,3 +57,70 @@ with an endpoint called "p_m" running on port 6006 and can be run with a uvicorn
  to ensure that all the proper dependencies have been synced on the local machine before running app.py
 
  assume the use will run the config script from the mpa directory so if you need to put uv.lock and pyproject.toml files somewhere on the local drive then put it there
+
+---
+
+great - it worked for the bash script version but not the bat version.  I was receiving the following error:
+error: Project virtual environment directory `C:\Users\jfhar\github\first_no_code\explore_scripts\mpa\.venv` cannot be used because it is not a valid Python environment (no Python executable was found)
+can you  fix?
+
+---
+
+ok thank you for finding the error.
+could you instead in both uv_install scripts, could you just wipe out the .venv directory and re-install so that there is no
+confusion between the scripts?
+
+---
+
+committed
+
+---
+
+ok now i want to modularize
+create a new script called install_and_run for bash and bat.  Move the call to uv_install and the uv run command into install_and_run from config.bat
+then before those commands, import the config.bat script
+
+---
+
+now for the install_and_run script, have the ability to take an additional argument.  If the argument is equal to "uv" then call the uv_install.sh
+otherwise do not call the uv_install.sh
+
+---
+
+also before running the uv_install.sh, check to see if the uv utility is installed.  If not, then install it using pip.  
+If it is not installed and you are using the bat script, make sure that the powershell execution policy is set in the following way:
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+
+---
+
+great!  that worked
+So now, lets change the uv run --env-file ... line in each of the scripts.   Instead of running it in the same terminal, open a new terminal and run that command
+
+---
+
+great that worked as well.  I noticed you put the names p_m and i_t_m in the names of the tabs.  Can you place those names as variables in
+the config.bat that I could change at a later time?  So for example, you have the string "p_m" in the service running port 6006, if I change the variable
+in config to p_m_1, that should be reflected in the tab title
+
+---
+
+great!  ok now can you add an additional capability to the stop_services script so that in addition to stopping the services at those ports, you can physically close the
+tab with that name (e.g. the SERVICE_PM_NAME) in it
+
+---
+
+i would like to add some additonal variables to config.bat
+
+first lets add P_M_SERVER_PORT and set it equal to 6006 and reference it as that variable name instead of the hard coded port
+and do the same for I_T_M_SERVER_PORT
+
+---
+
+i would also like to add a variable for server paths, meaning rather than use src/servers/m/g/i_t_m in the install_and_run replace it with a variable:
+create a variable called P_M_SERVER_PATH, set it equal to src/servers/m/g/p_m and do the same with i_t_m (I_T_M_SERVER_PATH) and substitute those in the install_and_run
+
+
+---
+
+ok great!  now i would like to add a similar app.py in the path src/servers/m/g/o_m/basic.  In a similar way to the i_t_m and p_m, could you add 
+corresponding variables to config.bat and run that app in a different tab in the window that gets opened when running?
