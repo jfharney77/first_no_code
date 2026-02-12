@@ -32,19 +32,23 @@ stop_service_tabs() {
 }
 
 if [ "$1" = "samewindow" ]; then
-    stop_service_samewindow $P_M_SERVER_PORT "$SERVICE_PM_NAME"
-    stop_service_samewindow $I_T_M_SERVER_PORT "$SERVICE_ITM_NAME"
-    stop_service_samewindow $O_M_SERVER_PORT "$SERVICE_OM_NAME"
-    stop_service_samewindow $C_S_A_R_M_SERVER_PORT "$SERVICE_CSARM_NAME"
-    stop_service_samewindow $I_A_R_M_SERVER_PORT "$SERVICE_IARM_NAME"
-    stop_service_samewindow $O_I_M_SERVER_PORT "$SERVICE_OIM_NAME"
-    stop_service_samewindow $PR_M_SERVER_PORT "$SERVICE_PRM_NAME"
-    stop_service_samewindow $T_A_M_SERVER_PORT "$SERVICE_TAM_NAME"
-    stop_service_samewindow $T_B_M_SERVER_PORT "$SERVICE_TBM_NAME"
-    stop_service_samewindow $T_D_M_SERVER_PORT "$SERVICE_TDM_NAME"
-    stop_service_samewindow $T_E_M_SERVER_PORT "$SERVICE_TEM_NAME"
-    stop_service_samewindow $V_M_SERVER_PORT "$SERVICE_VM_NAME"
-    stop_service_samewindow $W_MJ_SERVER_PORT "$SERVICE_WMJ_NAME"
+    PIDFILE="$DEFAULT_PROJ_ROOT/.service_pids"
+    if [ -f "$PIDFILE" ]; then
+        while read -r PID; do
+            if kill -0 "$PID" 2>/dev/null; then
+                echo "Stopping process (PID: $PID)..."
+                kill "$PID" 2>/dev/null
+                # Also kill child processes
+                pkill -P "$PID" 2>/dev/null
+            else
+                echo "Process $PID is not running."
+            fi
+        done < "$PIDFILE"
+        rm -f "$PIDFILE"
+        echo "All services stopped."
+    else
+        echo "No PID file found at $PIDFILE. Services may not have been started with samewindow."
+    fi
 else
     stop_service_tabs $P_M_SERVER_PORT "$SERVICE_PM_NAME"
     stop_service_tabs $I_T_M_SERVER_PORT "$SERVICE_ITM_NAME"
