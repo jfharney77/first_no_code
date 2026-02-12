@@ -44,3 +44,10 @@ set "T_E_M_SERVER_PATH=src\servers\m\g\t_e_m\basic\app.py"
 set "V_M_SERVER_PATH=src\servers\m\g\v_m\basic\app.py"
 set "W_MJ_SERVER_PATH=src\servers\m\g\w_mj\basic\app.py"
 
+:: Update PYTHONPATH in .env
+set "ENV_FILE=%DEFAULT_PROJ_ROOT%\.env"
+if not exist "%ENV_FILE%" type nul > "%ENV_FILE%"
+findstr /v "^PYTHONPATH=" "%ENV_FILE%" > "%ENV_FILE%.tmp" 2>nul
+echo PYTHONPATH=.;src>> "%ENV_FILE%.tmp"
+move /y "%ENV_FILE%.tmp" "%ENV_FILE%" >nul
+

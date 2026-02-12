@@ -46,4 +46,11 @@ T_E_M_SERVER_PATH="src/servers/m/g/t_e_m/basic/app.py"
 V_M_SERVER_PATH="src/servers/m/g/v_m/basic/app.py"
 W_MJ_SERVER_PATH="src/servers/m/g/w_mj/basic/app.py"
 
+# Update PYTHONPATH in .env
+ENV_FILE="$DEFAULT_PROJ_ROOT/.env"
+touch "$ENV_FILE"
+grep -v '^PYTHONPATH=' "$ENV_FILE" > "$ENV_FILE.tmp"
+echo "PYTHONPATH=.;src" >> "$ENV_FILE.tmp"
+mv "$ENV_FILE.tmp" "$ENV_FILE"
+
 . "$SCRIPT_DIR/initialize.sh"
